@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 
-const LoginPage = () => {
+const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -32,8 +32,8 @@ const LoginPage = () => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
             </svg>
           </div>
-          <h1 className="text-3xl font-bold text-gray-900">Welcome Back</h1>
-          <p className="text-gray-600 mt-2">Please sign in to your account</p>
+          <h1 className="text-3xl font-bold text-gray-900">Welcome</h1>
+          <p className="text-gray-600 mt-2">Lets create your account</p>
         </div>
 
         {/* Login Form */}
@@ -86,29 +86,16 @@ const LoginPage = () => {
               </div>
             </div>
 
-            {/* Remember Me and Forgot Password */}
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <input type="checkbox" id="remember" className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" />
-                <label htmlFor="remember" className="ml-2 block text-sm text-gray-700">
-                  Remember me
-                </label>
-              </div>
-              <button type="button" className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                Forgot Password?
-              </button>
-            </div>
-
             {/* Submit Button */}
             <button type="submit" className="w-full bg-indigo-600 text-white py-3 px-4 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 font-medium transition-colors duration-200">
-              Sign In
+              Sign Up
             </button>
           </form>
 
           {/* Sign Up Link */}
           <div className="text-center mt-6">
             <p className="text-sm text-gray-600">
-              Dont have an account? <button className="font-medium text-indigo-600 hover:text-indigo-500">Sign up now</button>
+              Have an account? <button className="font-medium text-indigo-600 hover:text-indigo-500">Sign in now</button>
             </p>
           </div>
         </div>
@@ -117,4 +104,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default SignUp;

@@ -1,8 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Menu, X, CheckSquare, List, Settings, User, LogOut, Calendar, Star, Clock, Trash, ChevronDown } from "lucide-react";
+import { getCheckList } from "../services/checklist";
+import { getUser } from "../services/auth";
 
 const TodoLayout = () => {
+  const [checklist, setChecklist] = useState([]);
+  const [user, setUser] = useState([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [activeCategory, setActiveCategory] = useState("all");
   const [isProjectsOpen, setIsProjectsOpen] = useState(true);
@@ -12,6 +16,24 @@ const TodoLayout = () => {
     { id: 3, text: "Prepare presentation", completed: false },
   ]);
   const [newTodo, setNewTodo] = useState("");
+
+  useEffect(() => {
+    console.log("useEffect dipanggil");
+    const fecthChecklist = async () => {
+      console.log("Fetching checklist...");
+      const checklistData = await getCheckList();
+      setChecklist(checklistData);
+      console.log(checklistData);
+    };
+    const fetchUser = async () => {
+      console.log("Fetching User...");
+      const userData = await getUser();
+      setUser(userData);
+      console.log(userData);
+    };
+    fecthChecklist();
+    fetchUser();
+  }, []);
 
   const projects = [
     { id: 1, name: "Personal", count: 3 },
@@ -78,8 +100,8 @@ const TodoLayout = () => {
                 <User size={24} />
               </div>
               <div>
-                <h3 className="font-medium">John Doe</h3>
-                <p className="text-sm text-gray-400">john@example.com</p>
+                <h3 className="font-medium">{user.name}</h3>
+                <p className="text-sm text-gray-400">{user.email}</p>
               </div>
             </div>
 

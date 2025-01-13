@@ -2,9 +2,11 @@
 import React, { useEffect, useState } from "react";
 import { Menu, X, CheckSquare, List, Settings, User, LogOut, Calendar, Star, Clock, Trash, ChevronDown } from "lucide-react";
 import { getCheckList } from "../services/checklist";
-import { getUser } from "../services/auth";
+import { getUser, logout } from "../services/auth";
+import { useRouter } from "next/navigation";
 
 const TodoLayout = () => {
+  const router = useRouter();
   const [checklist, setChecklist] = useState([]);
   const [user, setUser] = useState([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -50,6 +52,18 @@ const TodoLayout = () => {
     if (newTodo.trim()) {
       setTodos([...todos, { id: Date.now(), text: newTodo, completed: false }]);
       setNewTodo("");
+    }
+  };
+
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await logout();
+      if (response) {
+        router.push("/");
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -137,7 +151,7 @@ const TodoLayout = () => {
             </div>
 
             {/* Logout Section */}
-            <div className="pt-4 border-t border-gray-700">
+            <div className="pt-4 border-t border-gray-700" onClick={handleLogout}>
               <div className="flex items-center space-x-3 p-3 text-red-400 hover:bg-gray-700 rounded-lg cursor-pointer">
                 <LogOut size={20} />
                 <span>Logout</span>
